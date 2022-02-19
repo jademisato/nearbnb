@@ -12,7 +12,7 @@ function Title() {
         <div>
           <NavLink
             className="nav-link"
-            exact
+            exact={"true"}
             to="/">List</NavLink>
 
           <NavLink
