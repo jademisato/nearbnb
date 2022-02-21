@@ -5,6 +5,7 @@ import POPOSList from './POPOSList';
 import Footer from './Footer';
 import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 import About from './About'
+import POPOSDetails from './POPOSDetails'
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Routes>
           <Route exact path="/" element={<POPOSList />} />
           <Route path="/about" element={<About />} />
+          <Route path="/details/:poposdetailsId" element={< POPOSDetails />} />
           </Routes>
           <Footer />
       </div>
