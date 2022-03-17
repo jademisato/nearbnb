@@ -1,5 +1,6 @@
 import { onSnapshot, collection } from "firebase/firestore"
 import db from "../firebase"
+import { doc} from "firebase/firestore";
 import { query, where } from "firebase/firestore";
 
 
@@ -16,16 +17,27 @@ const Dot = ({ color }) => {
 }
 
 export default function App() {
+  // name のみ取得
+  // const q = query(collection(db, "colors"));
+  // const unsubscribe = onSnapshot(q, (querySnapshot) => {
+  //   const cities = [];
+  //   querySnapshot.forEach((doc) => {
+  //     cities.push(doc.data().name);
+  //   });
 
+  //   console.log(cities);
+  // });
+
+  // 単一collection内の全てのドキュメントを取得
   const q = query(collection(db, "colors"));
   const unsubscribe = onSnapshot(q, (querySnapshot) => {
-    const cities = [];
     querySnapshot.forEach((doc) => {
-      cities.push(doc.data().name);
+      console.log(doc.id, " => ", doc.data());
     });
-    console.log(q);
-    console.log(cities);
+
+    console.log(doc.data);
   });
+
   return (
     <div>
       <button>New</button>
