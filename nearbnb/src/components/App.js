@@ -31,11 +31,14 @@ export default function App() {
   // 単一collection内の全てのドキュメントを取得
   const q = query(collection(db, "colors"));
   const unsubscribe = onSnapshot(q, (querySnapshot) => {
+    const colors02 = [];
     querySnapshot.forEach((doc) => {
+      colors02.push(doc.data());
       console.log(doc.id, " => ", doc.data());
     });
 
     console.log(doc.data);
+    console.log(colors02);
   });
 
   return (
