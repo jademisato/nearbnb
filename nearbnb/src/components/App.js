@@ -1,8 +1,6 @@
 import { onSnapshot, collection } from "firebase/firestore"
+import { useEffect, useState } from "react";
 import db from "../firebase"
-import { doc} from "firebase/firestore";
-import { query, where } from "firebase/firestore";
-
 
 const Dot = ({ color }) => {
   const style = {
@@ -12,48 +10,30 @@ const Dot = ({ color }) => {
     backgroundColor: color,
     borderRadius: "50%",
     display: "inline-block"
-  }
-  return <span style={style}></span>
-}
+  };
+  return <span style={style}></span>;
+};
 
 export default function App() {
-  // name のみ取得
-  // const q = query(collection(db, "colors"));
-  // const unsubscribe = onSnapshot(q, (querySnapshot) => {
-  //   const cities = [];
-  //   querySnapshot.forEach((doc) => {
-  //     cities.push(doc.data().name);
-  //   });
+  const [colors, setColors] = useState([{name: "Loading...", id: "initial"}]);
 
-  //   console.log(cities);
-  // });
-
-  // 単一collection内の全てのドキュメントを取得
-  const q = query(collection(db, "colors"));
-  const unsubscribe = onSnapshot(q, (querySnapshot) => {
-    const colors02 = [];
-    querySnapshot.forEach((doc) => {
-      colors02.push(doc.data());
-      console.log(doc.id, " => ", doc.data());
-    });
-
-    console.log(doc.data);
-    console.log(colors02);
-  });
+  useEffect(
+    () => 
+      onSnapshot(collection(db, "colors"), (snapshot) =>
+        setColors(snapshot.docs.map((doc) => ({...doc.data(), id: doc.id})))
+      ),
+      []
+    );
 
   return (
     <div>
       <button>New</button>
       <ul>
-        <li>
-          <a href="#">edit</a> <Dot color="#f00" /> Red
-        </li>
-        <li>
-          <a href="#">edit</a> <Dot color="#0f0" /> Green
-        </li>
-        <li>
-          <a href="#">edit</a> <Dot color="#00f" /> blue
-        </li>
+        {colors.map((color) => (
+          <li key={color.id}>
+            <a href="#">edit</a> <Dot color={color.value} /> {color.name}
+          </li>
+        ))}
       </ul>
     </div>
   );
