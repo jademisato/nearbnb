@@ -1,18 +1,8 @@
-import { onSnapshot, collection, addDoc } from "firebase/firestore"
+import { onSnapshot, collection } from "firebase/firestore"
 import { useEffect, useState } from "react";
 import db from "../firebase"
-
-const Dot = ({ color }) => {
-  const style = {
-    height: 25,
-    width: 25,
-    margin: "0px 10px",
-    backgroundColor: color,
-    borderRadius: "50%",
-    display: "inline-block"
-  };
-  return <span style={style}></span>;
-};
+import Dot from "./logicism/Dot";
+import { handleNew, handleEdit } from "./logicism/util";
 
 export default function App() {
   const [colors, setColors] = useState([{name: "Loading...", id: "initial"}]);
@@ -24,15 +14,6 @@ export default function App() {
       ),
       []
   );
-  
-  const handleNew = async () => {
-    const name = prompt("Enter color name");
-    const value = prompt("Enter color value");
-    
-    const collectionRef = collection(db, "colors");
-    const payload = {name, value};
-    await addDoc(collectionRef, payload);
-   };
 
   return (
     <div>
@@ -40,7 +21,7 @@ export default function App() {
       <ul>
         {colors.map((color) => (
           <li key={color.id}>
-            <a href="#">edit</a> <Dot color={color.value} /> {color.name}
+            <a href="#" onClick={() => handleEdit(color.id)}>edit</a> <Dot color={color.value} /> {color.name}
           </li>
         ))}
       </ul>
