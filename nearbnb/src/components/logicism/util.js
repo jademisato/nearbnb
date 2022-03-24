@@ -1,4 +1,4 @@
-import { collection, addDoc, setDoc, doc } from "firebase/firestore"
+import { collection, addDoc, setDoc, doc, deleteDoc, query, where, getDocs } from "firebase/firestore"
 import db from "../../firebase"
 
 export const handleNew = async () => {
@@ -18,4 +18,24 @@ export const handleEdit = async (id) => {
   const docRef = doc(db, "colors", id);
   const payload = { name, value };
   setDoc(docRef, payload);
+};
+
+export const handleDelete = async (id) => {
+  const docRef = doc(db, "colors", id);
+  await deleteDoc(docRef);
+};
+
+export const handleQueryDelete = async (id) => {
+  const UserInputname = prompt("Enter color name");
+
+  const collectionRef = collection(db, "colors");
+  const q = query(collectionRef, where("name", "==", UserInputname));
+  const snapshot = await getDocs(q);
+
+  const result = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+
+  result.forEach(async result => {
+    const docRef = doc(db, "colors", result.id);
+    await deleteDoc(docRef);
+  })
 };
