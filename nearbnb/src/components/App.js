@@ -1,4 +1,4 @@
-import { onSnapshot, collection } from "firebase/firestore"
+import { onSnapshot, collection, orderBy, query } from "firebase/firestore"
 import { useEffect, useState } from "react";
 import db from "../firebase"
 import Dot from "./logicism/Dot";
@@ -7,13 +7,16 @@ import { handleNew, handleEdit, handleDelete, handleQueryDelete } from "./logici
 export default function App() {
   const [colors, setColors] = useState([{name: "Loading...", id: "initial"}]);
 
-  useEffect(
-    () => 
-      onSnapshot(collection(db, "colors"), (snapshot) =>
-        setColors(snapshot.docs.map((doc) => ({...doc.data(), id: doc.id})))
-      ),
-      []
-  );
+  useEffect(() => {
+    const collectionRef = collection(db, "colors");
+    const q = query(collectionRef, orderBy("timestamp", "desc"));
+
+    const unsub = onSnapshot(q, (snapshot) =>
+      setColors(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+    );
+
+    return unsub;
+  },[]);
 
   return (
     <div>
