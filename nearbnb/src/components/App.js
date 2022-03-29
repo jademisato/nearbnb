@@ -7,7 +7,7 @@ import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 import About from './About'
 import POPOSDetails from './POPOSDetails'
 
-function App() {  
+function App() {
   return (
     <Router>
       <div className="App">
