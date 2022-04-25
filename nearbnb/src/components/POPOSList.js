@@ -24,7 +24,7 @@ function POPOSList() {
         key={id}
         name={title}
         address={address}
-        // image={images[0]}
+        image={images[0]}
         hours={hours}
       />
     )
