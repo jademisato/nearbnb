@@ -17,14 +17,15 @@ function POPOSList() {
     []
   );
 
-  const spaces = places.map(({ title, address, images, hours, id }, i) => {
+  const spaces = places.map(({ title, address, imgURL, hours, id }, i) => {
     return (
       <POPOSSpace
         id={i}
         key={id}
         name={title}
         address={address}
-        image={images[0]}
+        image = {imgURL}
+        // image={image[0]}
         hours={hours}
       />
     )
