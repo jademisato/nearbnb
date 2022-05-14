@@ -5,10 +5,14 @@ import { Link } from 'react-router-dom'
 
 function POPOSSpace(props) {
   const { name, image, address, hours, id } = props
+  // console.log("space")
+  // console.log(props)
+  // console.log("space")
+
   return (
     <div>
       <Link to={`/details/${id}`}>
-        <img src={`${process.env.PUBLIC_URL}images/${image}`} width="300" height="300" alt="Hello" />
+        <img src={image} width="300" height="300" alt="image" />
       </Link>
       <h1>
         <Link to={`/details/${id}`}>
@@ -17,6 +21,7 @@ function POPOSSpace(props) {
       </h1>
       <div>{address}</div>
       <div>{hours}</div>
+      <div>{id}</div>
     </div>
   )
 }

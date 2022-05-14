@@ -8,7 +8,7 @@ import './POPOSList.css';
 
 function POPOSList() {
   const [places, setPlaces] = useState([{ name: "Loading...", id: "initial" }]);
-  console.log(places);
+  // console.log(places);
   useEffect(
     () =>
       onSnapshot(collection(db, "places"), (snapshot) =>
@@ -16,11 +16,12 @@ function POPOSList() {
       ),
     []
   );
+  console.log(places.id);
 
   const spaces = places.map(({ title, address, imgURL, hours, id }, i) => {
     return (
       <POPOSSpace
-        id={i}
+        id={id}
         key={id}
         name={title}
         address={address}
