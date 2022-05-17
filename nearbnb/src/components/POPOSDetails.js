@@ -6,14 +6,12 @@ import { useState, useEffect } from "react";
 function POPOSDetails(props) {
   let params = useParams()
   const { poposdetailsId } = params
-  // const { images, title, desc, hours, features, geo } = data[poposdetailsId]  
-  // console.log(params);
 
   const [place, setPlace] = useState({})
 
   useEffect(() => {
     const fetchPlace = async () => {
-      const placeRef = doc(db, "places", "isFpJxQ9TX94NC0aWecR");
+      const placeRef = doc(db, 'places', poposdetailsId);
       const docSnap = await getDoc(placeRef);
       const place = docSnap.data();
 
