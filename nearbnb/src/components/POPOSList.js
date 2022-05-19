@@ -16,7 +16,6 @@ function POPOSList() {
       ),
     []
   );
-  console.log(places.id);
 
   const spaces = places.map(({ title, address, imgURL, hours, id }, i) => {
     return (
