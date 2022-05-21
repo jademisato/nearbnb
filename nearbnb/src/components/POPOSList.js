@@ -32,8 +32,19 @@ function POPOSList() {
   })
 
   return (
-    <div className="POPOSList">
-      {spaces}
+    <div>
+      <div className="search-form">
+        <form>
+          <input
+            value={query}
+            placeholder="search"
+          />
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+      <div className="POPOSList">
+        {spaces}
+      </div>
     </div>
   )
 }
