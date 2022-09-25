@@ -1,3 +1,4 @@
+import React from 'react';
 import db from "../firebase"
 import { doc, getDoc } from "firebase/firestore";
 import { useParams } from "react-router-dom"
