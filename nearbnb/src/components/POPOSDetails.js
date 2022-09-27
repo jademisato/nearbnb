@@ -27,7 +27,7 @@ function POPOSDetails(props) {
   return (
     <div className="POPOSDetails">
       <div className="POPOSDetails-image">
-        <img src={place.imgURL} />
+        <img src={place.imgURL} alt="park"/>
         {/* <img src={`${process.env.PUBLIC_URL}images/${images[0]}`} /> */}
       </div>
       <div className="POPOSDetails-info">

@@ -1,4 +1,4 @@
-import { onSnapshot, collection, orderBy, query } from "firebase/firestore"
+import { onSnapshot, collection } from "firebase/firestore"
 import { useEffect, useState } from "react";
 import db from "../firebase"
 import React from 'react';
